@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- drawer.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+    <script src="https://kit.fontawesome.com/09179831a3.js" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+    {% block head %}
+
+    {% endblock %}
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page drawer drawer--right drawer--navbarTopGutter">
+    <!-- Header template -->
+    {% include 'templates/header.html' %}
+
+    
+    <!-- Body -->
+    {% block body %} {% endblock %}
+
+    
+
+    <!-- Footer template -->
+    {% include 'templates/footer.html' %}
+    
+    <!-- jquery & iScroll -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+    <!-- drawer.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.drawer').drawer();
+        });
+    </script>
+
+    {% block footer %}
+    {% endblock %}
+</body>
+</html>

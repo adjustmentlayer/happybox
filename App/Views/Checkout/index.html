@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Оплата{% endblock %}
+
+{% block body %}
+    
+<section class="checkout-panel">
+    <div class="checkout-panel__inner container">
+
+        <h3 class="h3">Оплата и доставка</h3>
+        <form class="checkout-panel__form " action="process_order.php" method="POST">
+            <div class="form__error form__error_hidden">
+                <ul class="form__error-list list">
+                </ul>
+            </div>
+            <div class="form__group-box">
+                <p>
+                    <label class="label form__label" for="first_name">Имя&nbsp;<abbr class="label__required-star" title="обязательно">*</abbr></label>
+                    <input id="first_name" name="first_name" class="form__input" type="text">
+                </p>
+                <p>
+                    <label class="label form__label" for="phone">Телефон&nbsp;<abbr class="label__required-star" title="обязательно">*</abbr></label>
+                    <input id="phone" name="phone" class="form__input phone-mask" type="text">
+                </p>
+                <p>
+                    <label class="label form__label" for="email">Email&nbsp;</label>
+                    <input id="email" name="email" class="form__input" type="text">
+                </p>
+                <p>
+                    <label class="label form__label" for="instagram">Ник в Инстаграмме&nbsp;<abbr class="label__required-star" title="обязательно">*</abbr></label>
+                    <input id="instagram" name="instagram" class="form__input" type="text">
+                </p>
+
+            </div>
+            <div class="form__group-box">
+            <p>
+                <label class="label form__label" for="last_name">Фамилия&nbsp;<abbr class="label__required-star" title="обязательно">*</abbr></label>
+                <input id="last_name" name="last_name" class="form__input" type="text">
+            </p>
+            </div>
+
+            <div class="form__novaposhta">
+                <div class="novaposhta">
+                    <h3 class="h3 mb-0">Укажите адрес доставки</h3>
+                    <select class="select" name="area" id="selectAreas">
+                        <option disabled selected value="not_selected">Оберіть область</option>
+                    </select>
+                    <select class="select" name="settlement" id="selectSettlements"></select>
+                    <select class="select" name="warehouse" id="selectWarehouses"></select>
+                </div>
+            </div>
+            <div class="form__group-box">
+                <h3 class="h3 mb-0">Способ оплаты</h3>
+                <select class="select" name="payment_method" >
+                    <option value="наложенный платеж">Наложенный платеж</option>
+                    <option value="онлайн-оплата">Онлайн-оплата</option>
+                </select>
+            </div>
+            <div class="form__order-review order-review">
+                <h3 class="h3 order-review__heading">Ваш заказ</h3>
+                <!-- Добавь код ниже -->
+
+                
+
+                <!-- Добавь код выше -->
+            </div>
+            <div class="form__recaptcha">
+                <div class="g-recaptcha" data-sitekey="6LfK_uIUAAAAAMshgATbz-vpxAN80ZwApTVluV1O"></div>
+                <div class="text-danger" id="recaptchaError"></div>
+            </div>
+            
+            <div class="form__payment-methods">
+                <label class="label form__payment-method"> </label>
+                <p class="pt-3">Подтверждая заказ вы соглашаетесь с <a href="public-offer-agreement.php">правилами сайта</a></p>
+                <button type="submit" class="form__submit-button button link link_color_black button_size_l" name="checkout_place_order" value="Подтвердить заказ" >Подтвердить заказ</button>
+                <div class="form__order-status"></div>
+            </div>
+        </form>
+        <div id="liqpay">
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+
+
+{% block footer%} 
+   
+<script src="/js/jquery.mask.js"></script>
+<script src="/js/novaposhta.js"></script>
+<script src="/js/checkout.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+{% endblock %}
