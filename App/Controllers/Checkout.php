@@ -7,8 +7,8 @@ use \App\Models\Box;
 use \App\Session;
 use \App\Cart;
 
-
-
+    
+  
 /**
  * Home controller
  *
@@ -24,9 +24,12 @@ class Checkout extends \Core\Controller
      */
     public function indexAction()
     {
-        View::renderTemplate('Checkout/index.html');
+        View::renderTemplate('Checkout/index.html',cart::getitems());
+        cart::getitems();
         
     }
+    
+    
 
     
     

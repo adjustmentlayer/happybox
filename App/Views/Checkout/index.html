@@ -60,7 +60,37 @@
                 <h3 class="h3 order-review__heading">Ваш заказ</h3>
                 <!-- Добавь код ниже -->
 
+                <div class="flex justify-center ba ">
+                    <h1 class="flex pr7 f3">Товар </h1>
+            
+                    <h1 class="flex pl7 f3">Итого </h1>
+            
+                </div>
+
+                {% for item in items%}
+                       
+
+            <div class="flex justify-center ba">
+               
                 
+                <p class="pr7"> {{item.name}} x {{item.quantity}} </p>
+                <p class="pl7"> {{item.total}}  </p>
+                
+            </div>  
+   
+                {%endfor%}
+               
+                
+                <div class="flex justify-center ba w-100">
+                    <h1 class="pr7 f4 ">Доставка   </h1>
+                    <h1 class="pl7 f4 ">Новая Почта</h1>
+                    
+                </div>
+                <div class="flex justify-center ba w-100">
+                    <h1 class="pr7 f4">Итого        </h1>
+                    <h1 class="pl7 f4">{{cartTotal}}</h1>
+                </div>
+            
 
                 <!-- Добавь код выше -->
             </div>
