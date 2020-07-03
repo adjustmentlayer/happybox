@@ -1,0 +1,21 @@
+{
+  "name": "skylogic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify js/app.js -o js/bundle.js",
+    "watch": "watchify js/app.js -o js/bundle.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^16.5.1",
+    "html-to-vdom": "^0.7.0",
+    "hyperscript": "^2.0.2",
+    "hyperscript-helpers": "^3.0.3",
+    "i": "^0.3.6",
+    "virtual-dom": "^2.1.1",
+    "watchify": "^3.11.1"
+  }
+}
