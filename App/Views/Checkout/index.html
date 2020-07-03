@@ -57,42 +57,42 @@
                 </select>
             </div>
             <div class="form__order-review order-review">
-                <h3 class="h3 order-review__heading">Ваш заказ</h3>
-                <!-- Добавь код ниже -->
-
-                <div class="flex justify-center ba ">
-                    <h1 class="flex pr7 f3">Товар </h1>
-            
-                    <h1 class="flex pl7 f3">Итого </h1>
-            
-                </div>
-
-                {% for item in items%}
-                       
-
-            <div class="flex justify-center ba">
-               
+                <h3 class="h3 order-review__heading ">Ваш заказ</h3>
                 
-                <p class="pr7"> {{item.name}} x {{item.quantity}} </p>
-                <p class="pl7"> {{item.total}}  </p>
+                <div class="ba b--moon-gray">
+                    <div class="pl3 flex bb b--light-gray">
+                        <h1 class="f5 w-50">Товар </h1>
                 
-            </div>  
-   
-                {%endfor%}
-               
+                        <h1 class="f5 w-50">Итого </h1>
                 
-                <div class="flex justify-center ba w-100">
-                    <h1 class="pr7 f4 ">Доставка   </h1>
-                    <h1 class="pl7 f4 ">Новая Почта</h1>
+                    </div>
+    
+                    {% for item in items%}
+                            
+    
+                    <div class="pl3 flex bb b--light-gray">
                     
+                        
+                        <p class="f5 w-50"> {{item.name}} <span class="b">× {{item.quantity}}</span> </p>
+                        <p class="f5 w-50"> {{item.total}}  грн.</p>
+                        
+                    </div>  
+        
+                    {%endfor%}
+                    
+                    
+                    <div class="pl3 flex bb b--light-gray">
+                        <h1 class="f5 w-50">Доставка   </h1>
+                        <h1 class="f5 w-50">Новая Почта</h1>
+                        
+                    </div>
+                    <div class="pl3 flex">
+                        <h1 class="f5 w-50">Итого        </h1>
+                        <h1 class="f5 w-50">{{cartTotal}} грн.</h1>
+                    </div>
                 </div>
-                <div class="flex justify-center ba w-100">
-                    <h1 class="pr7 f4">Итого        </h1>
-                    <h1 class="pl7 f4">{{cartTotal}}</h1>
-                </div>
-            
-
-                <!-- Добавь код выше -->
+                
+               
             </div>
             <div class="form__recaptcha">
                 <div class="g-recaptcha" data-sitekey="6LfK_uIUAAAAAMshgATbz-vpxAN80ZwApTVluV1O"></div>
