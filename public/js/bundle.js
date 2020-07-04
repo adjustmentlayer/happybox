@@ -276,7 +276,7 @@ function cart(dispatch, model){
 
 function boxImage(className, path, alt){
     return div({className},[
-        img({src: path, className: '', alt: alt}),
+        img({src: '/img/products/'+path, className: '', alt: alt}),
     ]);
 }
 
@@ -364,7 +364,7 @@ function getQuantity(cart, id){
 }
 
 function box(box, cart, dispatch){
-    return div({className: 'w-third pa4 ma2 bg-white br4 flex flex-column items-center'},[
+    return div({className: 'w-third pa5 ma2 bg-white br4 flex flex-column items-center'},[
         boxImage('mw4', box.path+box.image, box.name),
         boxName(box.name),
         boxPrice(box.price),
