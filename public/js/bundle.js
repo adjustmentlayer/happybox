@@ -188,7 +188,7 @@ function update (msg, model) {
 
 function insideProduct(product){
     return div({className:'w-third'},[
-        img({src: product.product_img, alt: product.product_name}),
+        img({src: '/img/products/' +product.product_img, alt: product.product_name}),
         p({className:'tc'}, product.product_name)
     ]);
 }
@@ -276,7 +276,7 @@ function cart(dispatch, model){
 
 function boxImage(className, path, alt){
     return div({className},[
-        img({src: '/img/products/'+path, className: '', alt: alt}),
+        img({src: path, className: '', alt: alt}),
     ]);
 }
 
