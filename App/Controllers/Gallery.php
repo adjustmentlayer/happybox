@@ -29,8 +29,8 @@ class Gallery extends \Core\Controller
 
         /* echo "<pre>";
         var_dump($photos);
-        echo '</pre>'; */
-
+        echo '</pre>';
+ */
         View::renderTemplate('Gallery/index.html', [
             'photos' => $photos,
         ]);

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Галерея{% endblock %}
+
+{% block body %}
+
+
+    
+<main class="page__main container">
+    <div class="main__gallery">
+        <h1 class="main__gallery-heading">Фотогалерея</h1>
+        <div class="Gallery" id="Gallery">
+            {% for photo in photos %}
+            <div class="thumb/gallery__item item" data-src="/img/medium/{{photo.photo_id}}.jpg">
+            <img src="/img/thumb/{{photo.photo_id}}.jpg">
+            {% endfor %}
+      
+    </div>
+</main>
+ 
+
+
+
+{% endblock %}
