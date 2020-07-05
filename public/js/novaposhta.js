@@ -43,7 +43,7 @@ function getSettlements(){
         var limit = areaSelect.options[areaSelect.selectedIndex].dataset.limit;
         var page = Number(areaSelect.options[areaSelect.selectedIndex].dataset.page);
 
-        var url = "novaposhta.php";
+        var url = "/novaposhta/getSettlements";
         
         var settings = {
             'apiKey':'',
@@ -99,7 +99,7 @@ function getWarehouses(){
         }
     }
     var s_settings = "settings="+JSON.stringify(settings);
-    var url = "novaposhta.php";
+    var url = "/novaposhta/getWarehouses";
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);    
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');

@@ -2,6 +2,10 @@
 
 {% block title %}Галерея{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.12/dist/css/lightgallery.min.css">
+{% endblock %}
+
 {% block body %}
 
 
@@ -9,16 +13,26 @@
 <main class="page__main container">
     <div class="main__gallery">
         <h1 class="main__gallery-heading">Фотогалерея</h1>
-        <div class="Gallery" id="Gallery">
+        <div class="gallery" id="gallery">
             {% for photo in photos %}
+
             <div class="thumb/gallery__item item" data-src="/img/medium/{{photo.photo_id}}.jpg">
-            <img src="/img/thumb/{{photo.photo_id}}.jpg">
+                <img src="/img/thumb/{{photo.photo_id}}.jpg">
+            </div>
             {% endfor %}
+        </div>
       
     </div>
 </main>
  
 
+{% endblock %}
 
-
+{% block footer %}
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.12/dist/js/lightgallery.min.js"></script>
+<script type="text/javascript">
+    $('#gallery').lightGallery({
+        selector: '.item'
+    });
+</script>
 {% endblock %}
