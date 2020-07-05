@@ -5,6 +5,15 @@ Background colors:
 dodgeblue: #2ea3f2
 **/
 
+/** Кастомные классы в стиле tachyon  **/
+
+.right-3{
+    right:3rem;
+}
+
+.right-4{
+    right:4rem;
+}
 
 /*------- Полезные классы ---------*/
 

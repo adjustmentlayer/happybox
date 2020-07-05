@@ -125,9 +125,7 @@ function addItem(dispatch, msg, link){
         if (xhr.status === 200) {
     
             const result = this.responseText;
-            console.log(result);
             const json = JSON.parse(result);
-            console.log(json);
             dispatch(msg(json.response));
             
         } else {
@@ -157,7 +155,6 @@ function update (msg, model) {
         }
 
         case MSGS.OPEN_CART_CLICK:{
-
             return { ...model, showCart: true }
         }
 
@@ -169,13 +166,16 @@ function update (msg, model) {
         case MSGS.REMOVE_PRODUCT_CLICK:{
 
             const {items, cartTotal} = msg.response.cart;
+
+            if(items.length == 0){
+                return {...model, cart:[...items],  cartTotal, showCart:false };
+            }
             return {...model, cart:[...items],  cartTotal }
         }
 
         case MSGS.SHOW_INSIDE_PRODUCTS_CLICK:{
-            console.log(msg);
+
             const whatsInsideProducts = msg.response.products;
-            console.log(whatsInsideProducts);
             return {...model, whatsInsideProducts: [...whatsInsideProducts], showCart: false, showWhatsInside: true }
         }
 
@@ -183,12 +183,12 @@ function update (msg, model) {
             return {...model, showCart: false, showWhatsInside: false }
         }
     }
-    return model;
+    return model; 
 }
 
 function insideProduct(product){
     return div({className:'w-third'},[
-        img({src: '/img/products/' +product.product_img, alt: product.product_name}),
+        img({src: '/img/products/' + product.product_img, alt: product.product_name}),
         p({className:'tc'}, product.product_name)
     ]);
 }
@@ -262,7 +262,7 @@ function cart(dispatch, model){
             div({className: 'relative w6 pa3 bg-light-gray z-max'},[
                 div({
                     className: 'absolute right-0 top-0 pointer dim',
-                    onclick: () => dispatch(closeCartClickMsg()),
+                    onclick: (e) =>{e.stopPropagation(); dispatch(closeCartClickMsg())},
                 }, i({className: 'pa2 fas fa-times'})),
                 div({className: 'pa3 maxh5 overflow-y-auto'}, cards),
                 cartActions(model),
@@ -278,7 +278,7 @@ function boxImage(className, path, alt){
     return div({className},[
         img({src: path, className: '', alt: alt}),
     ]);
-}   
+}
 
 function boxName(name){
     return h3({className: 'mv1'}, name)
@@ -317,9 +317,12 @@ function addedToCartBtn(dispatch, id){
             className: 'ba b--black bg-white pointer pa0 w-100'
         }, a({
             className: 'db link pv2 ph4 hover-bg-black hover-white', 
-            href: `/home/${id}/add`,
-            onclick: (e) => { e.preventDefault(); dispatch(openCartClickMsg())},
-        },i({className:'fas fa-shopping-cart' }))),
+            onclick: (e) => { e.stopPropagation();e.preventDefault(); dispatch(openCartClickMsg())},
+            title: "Перейти в корзину"
+        },i({className:'fas fa-shopping-cart' }),
+            
+            
+        )),
         
     ]);
 }
@@ -364,12 +367,15 @@ function getQuantity(cart, id){
 }
 
 function box(box, cart, dispatch){
-    return div({className: 'w-third pa5 ma2 bg-white br4 flex flex-column items-center'},[
-        boxImage('mw4', box.path+box.image, box.name),
-        boxName(box.name),
-        boxPrice(box.price),
-        boxButton(cart, box.id, dispatch),
-        whatsInsideLabel(dispatch, box.id),
+    return div({className: 'w-100 w-50-m w-third-l pa2 '},[
+        div({className:'pa3 flex flex-column items-center bg-white br4 '},[
+            boxImage('mw4', box.path+box.image, box.name),
+            boxName(box.name),
+            boxPrice(box.price),
+            boxButton(cart, box.id, dispatch),
+            whatsInsideLabel(dispatch, box.id),
+        ]),
+        
     ]);
 }
 
@@ -378,7 +384,7 @@ function boxes(model, dispatch){
         return box(element, model.cart, dispatch);
     });
 
-    return div({className: 'flex '}, boxes);
+    return div({className: 'flex flex-wrap'}, boxes);
 }
 
 
@@ -392,18 +398,63 @@ function view(dispatch, model) {
     ]);
 }
 const node = document.querySelector('#app');
+const cartInHeader = document.querySelector("#cart");
 
 function app(initModel, update, view, node) {
     let model = initModel;
     let currentView = view(dispatch, model);
     let rootNode = createElement(currentView);
     node.appendChild(rootNode);
+    console.log(model);
+        if(model.cart.length !== 0){
+            const cartRootNode = div({
+                className: 'relative flex items-center pointer',
+                onclick: (e) => { e.stopPropagation();e.preventDefault(); dispatch(openCartClickMsg())},
+            },[
+                div({
+                    className: 'flex justify-center items-center lh-solid absolute bg-red br-100',
+                    style: 'width:20px; height:20px; top:7px; left:12px'
+                },[
+                    p({className:'mv0 f7 white '}, model.cart.length),
+                ]),
+                div({
+                    className:'fas fa-shopping-cart mr2 fa-lg',
+                }),
+                div({className:''}, 'Корзина')
+            ]);
+            cartInHeader.innerHTML = '';
+            cartInHeader.appendChild(createElement(cartRootNode));
+        }else{
+            cartInHeader.innerHTML = '';
+        }
+    
     function dispatch(msg) {
         model = update(msg, model);
         const updatedView = view(dispatch, model);
         const patches = diff(currentView, updatedView);
         rootNode = patch(rootNode, patches);
         currentView = updatedView;
+        if(model.cart.length !== 0){
+            const cartRootNode = div({
+                className: 'relative flex items-center pointer',
+                onclick: (e) => { e.stopPropagation();e.preventDefault(); dispatch(openCartClickMsg())},
+            },[
+                div({
+                    className: 'flex justify-center items-center lh-solid absolute bg-red br-100',
+                    style: 'width:20px; height:20px; top:7px; left:12px'
+                },[
+                    p({className:'mv0 f7 white '}, model.cart.length),
+                ]),
+                div({
+                    className:'fas fa-shopping-cart mr2 fa-lg',
+                }),
+                div({className:''}, 'Корзина')
+            ]);
+            cartInHeader.innerHTML = '';
+            cartInHeader.appendChild(createElement(cartRootNode));
+        }else{
+            cartInHeader.innerHTML = '';
+        }
     }
 }
 
