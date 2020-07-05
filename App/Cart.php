@@ -5,7 +5,7 @@ namespace App;
 use \App\Models\Box;
 use \App\Session;
 
-class Cart
+class Cart    
 {
     protected static $isItemInCart = false;
 

@@ -24,7 +24,6 @@ class About extends \Core\Controller
         View::renderTemplate('About/index.html');
     }
 
-
     public function contactAction()
     {
         View::renderTemplate('About/contact.html');

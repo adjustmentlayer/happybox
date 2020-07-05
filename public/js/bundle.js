@@ -278,7 +278,7 @@ function boxImage(className, path, alt){
     return div({className},[
         img({src: path, className: '', alt: alt}),
     ]);
-}
+}   
 
 function boxName(name){
     return h3({className: 'mv1'}, name)
