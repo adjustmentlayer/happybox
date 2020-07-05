@@ -40,6 +40,13 @@ class Checkout extends \Core\Controller
         
     }
 
+    public function thankYouAction()
+    {
+
+        View::renderTemplate('Checkout/thank-you.html');
+        
+    }
+
     public function proccessAction() {
 
         $arr_form_data = array(
