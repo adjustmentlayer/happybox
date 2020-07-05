@@ -34,21 +34,32 @@ class Checkout extends \Core\Controller
     {
         
         $cartItems = cart::getItems();
+
+        /* echo "<pre>";
+        var_dump($cartItems['cartTotal']);
+        echo "</pre>"; */
+
         $formatedArray = [];
 
-        foreach($cartItems['items'] as $key => $value){
+        foreach($cartItems['items'] as $key => $value){ 
+            
             $formatedArray['product_' . $key] = [
-                "value" => $value['name'] . ' x' . $value['quantity'],
-                "required" => false,
-                "descriptionRu" => "Заказано",
-                "emoji"=>"\xF0\x9F\x8E\x81",
+                'value' => $value['name'] . ' x' . $value['quantity'],
+                'required' => false,
+                'descriptionRu' => 'Заказано',
+                'emoji' => "\xF0\x9F\x8E\x81",
+
             ];
         }
 
-        echo "<pre>";
-        var_dump($formatedArray);
-        echo "</pre>";
+        $formatedArray['total'] => [
 
+        ];
+
+         echo "<pre>";
+        var_dump($formatedArray);
+        echo "</pre>"; 
+ 
 
         View::renderTemplate('Checkout/index.html',cart::getitems());
         
