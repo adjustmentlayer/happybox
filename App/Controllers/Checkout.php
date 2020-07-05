@@ -33,11 +33,21 @@ class Checkout extends \Core\Controller
     public function indexAction()
     {
         
-        $cartItems = cart::getItems();
+    
+        View::renderTemplate('Checkout/index.html',cart::getitems());
+        
+    }
 
-        /* echo "<pre>";
-        var_dump($cartItems['cartTotal']);
-        echo "</pre>"; */
+    public function thankYouAction()
+    {
+
+        View::renderTemplate('Checkout/thank-you.html');
+        
+    }
+
+    public function proccessAction() {
+
+        $cartItems = cart::getItems();
 
         $formatedArray = [];
 
@@ -57,25 +67,7 @@ class Checkout extends \Core\Controller
             'required' => false,
             'descriptionRu' => 'Итого',
             'emoji' => "\xF0\x9F\x92\xB5",
-        ];
-
-         echo "<pre>";
-        var_dump($formatedArray);
-        echo "</pre>"; 
- 
-
-        View::renderTemplate('Checkout/index.html',cart::getitems());
-        
-    }
-
-    public function thankYouAction()
-    {
-
-        View::renderTemplate('Checkout/thank-you.html');
-        
-    }
-
-    public function proccessAction() {
+        ]; 
 
         $arr_form_data = array(
             "first_name" => array(
@@ -130,20 +122,11 @@ class Checkout extends \Core\Controller
                 "required" => true,
                 "descriptionRu" => "Отделение Новой Почты",
                 "emoji"=>"\xF0\x9F\x93\xA6"
-            ),
-            "quantity" => array(
-                "value" => isset($_SESSION['box_1']) ? $_SESSION['box_1']: "0",
-                "required" => false,
-                "descriptionRu" => "Кол-во коробок",
-                "emoji" => "\xF0\x9F\x8E\x81"
-            ),
-            "total" => array(
-                "value" => isset($_SESSION['box_1']) ? $_SESSION['box_1'] * get_box_by_id(1)['box_price']. " грн.": "0 грн.",
-                "required" => false,
-                "descriptionRu" => "Итого",
-                "emoji" => "\xF0\x9F\x92\xB5"
             )
         );
+
+        $arr_form_data = array_merge($arr_form_data,$formatedArray);
+
         
         $this->validate_fields($arr_form_data);
         
