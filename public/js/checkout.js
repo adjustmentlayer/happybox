@@ -96,7 +96,7 @@ function placeOrder() {
                     let liqpayForm = document.querySelector("#liqpay-form");
                     liqpayForm.submit();
                 }else{
-                    window.location = "thankyou.php";
+                    window.location = "/checkout/thank-you";
                 }
                 
             }
