@@ -52,8 +52,11 @@ class Checkout extends \Core\Controller
             ];
         }
 
-        $formatedArray['total'] => [
-
+        $formatedArray['total'] = [
+            'value' => $cartItems['cartTotal'],
+            'required' => false,
+            'descriptionRu' => 'Итого',
+            'emoji' => "\xF0\x9F\x92\xB5",
         ];
 
          echo "<pre>";
