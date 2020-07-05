@@ -10,11 +10,11 @@ use \App\Cart;
     
   
 /**
- * Home controller
+ * Delivary controller
  *
  * PHP version 7.0
  */
-class Checkout extends \Core\Controller
+class Delivary extends \Core\Controller
 {
 
     /**
@@ -25,11 +25,10 @@ class Checkout extends \Core\Controller
     public function indexAction()
     {
 
-        View::renderTemplate('Checkout/index.html',cart::getitems());
+        
+        View::renderTemplate('Delivary/index.html',cart::getitems());
         
     }
-
-    
     
     
 
