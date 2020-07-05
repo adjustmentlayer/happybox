@@ -6,6 +6,7 @@ use \Core\View;
 use \App\Telegram;
 use \App\Session;
 use \App\Cart;
+use \App\Config;
 
     
   
@@ -19,10 +20,6 @@ class Checkout extends \Core\Controller
 
     private $errors = [];
 
-
-    private $novaposhta = array(
-        "token" => ""
-    );
     private $reCAPTCHA = array(
         "token" => ""
     );
@@ -35,6 +32,23 @@ class Checkout extends \Core\Controller
      */
     public function indexAction()
     {
+        
+        $cartItems = cart::getItems();
+        $formatedArray = [];
+
+        foreach($cartItems['items'] as $key => $value){
+            $formatedArray['product_' . $key] = [
+                "value" => $value['name'] . ' x' . $value['quantity'],
+                "required" => false,
+                "descriptionRu" => "Заказано",
+                "emoji"=>"\xF0\x9F\x8E\x81",
+            ];
+        }
+
+        echo "<pre>";
+        var_dump($formatedArray);
+        echo "</pre>";
+
 
         View::renderTemplate('Checkout/index.html',cart::getitems());
         
@@ -127,7 +141,7 @@ class Checkout extends \Core\Controller
             exit;
         }
 
-        $telegram = new Telegram("", "");
+        $telegram = new Telegram(Config::BOT_TOKEN, Config::CHAT_ID);
 
         // Отправляем заголовок и письмо на телеграм чат
         $telegram->send("Новый заказ", $arr_form_data);

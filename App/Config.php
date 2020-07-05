@@ -37,12 +37,12 @@ class Config
      * telegram bot token
      * @var string
      */
-    const BOT_TOKEN = "848616276:AAFyQ-o8hnCy1bAyrsGzanN01eb8eX8TGTk";
+    const BOT_TOKEN = "943911129:AAFdcwDYYNGURHORDlny58Uuumq1UnyGAgk";
     /**
      * telegram chat_id 
      * @var string
      */
-    const CHAT_ID = "-423670779";
+    const CHAT_ID = "-453020366";
      /**
      * recaptcha site key 
      * @var string
