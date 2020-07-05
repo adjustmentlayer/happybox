@@ -8,6 +8,10 @@ dodgeblue: #2ea3f2
 
 /*------- Полезные классы ---------*/
 
+ html {
+    scroll-behavior: smooth;
+ }
+
 .text-center {
     text-align: center;
 }
