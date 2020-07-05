@@ -345,7 +345,7 @@ function counter(id, quantity, dispatch){
 
 function whatsInsideLabel(dispatch, id){
     return a({
-        className: 'link blue pointer mv1 dim',
+        className: 'blue pointer mv1 dim',
         href: `/home/${id}/showGifts`,
         onclick: (e) => {e.preventDefault(); addItem(dispatch, showInsideProductsClickMsg, e.target.getAttribute('href'))},
     }, 'Что внутри?')
