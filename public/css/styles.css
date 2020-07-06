@@ -40,9 +40,7 @@ dodgeblue: #2ea3f2
 .d-flex {
     display: flex;
 }
-.flex-column{
-    flex-direction:column;
-}
+
 .justify-content-center{
     justify-content:center;
 }
@@ -285,7 +283,6 @@ button[disabled] {
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 2;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -948,9 +945,60 @@ button[disabled] {
     width: 32rem;
 }
 
+.w7{
+    width: 40rem;
+}
+
 .maxh5{
     max-height:16rem;
 }
 .maxh6{
     max-height:32rem;
+}
+.top-initial{
+    top:initial;
+}
+@media screen and (min-width: 30em) {
+    .w6-ns{
+        width: 32rem;
+    }
+    .top-initial-ns{
+        top:initial;
+    }
+    .maxh5-ns{
+        max-height:16rem;
+    }
+    .maxh6-ns{
+        max-height:32rem;
+    }
+}
+
+@media screen and (min-width: 30em) and (max-width: 60em) {
+    .w6-m{
+        width: 32rem;
+    }
+    .top-initial-m{
+        top:initial;
+    }
+    .maxh5-m{
+        max-height:16rem;
+    }
+    .maxh6-m{
+        max-height:32rem;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .w6-l{
+        width: 32rem;
+    }
+    .top-initial-l{
+        top:initial;
+    }
+    .maxh5-l{
+        max-height:16rem;
+    }
+    .maxh6-l{
+        max-height:32rem;
+    }
 }

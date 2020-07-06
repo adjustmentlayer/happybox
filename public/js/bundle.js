@@ -28,6 +28,7 @@ const {
 
 
 
+
 const MSGS = {
     ADD_TO_CART_CLICK: 'ADD_TO_CART_CLICK',
     OPEN_CART_CLICK: 'OPEN_CART_CLICK',
@@ -77,6 +78,7 @@ function closeWhatsInsideClickMsg(){
 
 
 function getAllBoxes(){
+    spinner.style.display = "flex";
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "Home/showBoxes", true);
@@ -101,6 +103,7 @@ function getAllBoxes(){
                     
                 }
                 app(initModel, update, view, node);
+                spinner.style.display = "none";
             } else {
             console.error(xhr.statusText);
             }
@@ -115,7 +118,7 @@ function getAllBoxes(){
 }
 
 function addItem(dispatch, msg, link){
-
+    spinner.style.display = "flex";
     const xhr = new XMLHttpRequest();
     xhr.open("GET", link, true);
     
@@ -127,7 +130,7 @@ function addItem(dispatch, msg, link){
             const result = this.responseText;
             const json = JSON.parse(result);
             dispatch(msg(json.response));
-            
+            spinner.style.display = "none";
         } else {
         console.error(xhr.statusText);
         }
@@ -199,17 +202,21 @@ function whatsInside(dispatch, model){
         const cards = model.whatsInsideProducts.map(element => {
             return insideProduct(element)
         })
-    
+           
         return div({
-            className: 'fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center z-999 bg-black-70'
+            className: 'fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center z-999 bg-black-70 pa2',
+            onclick: (e) => {if(e.target !== e.currentTarget) return; dispatch(closeWhatsInsideClickMsg());}
         }, [
            
-            div({className: 'relative w6 pa3 bg-light-gray z-max'},[
+            div({
+                className: 'relative w7 pa3 bg-light-gray z-max overflow-y-auto',
+                style:'max-height: 455px',
+            },[
                 div({
                     className: 'absolute right-0 top-0 pointer dim',
                     onclick: () => dispatch(closeWhatsInsideClickMsg()),
-                }, i({className: 'pa2 fas fa-times'})),
-                div({className: 'pa3 maxh6 overflow-y-auto flex flex-wrap'}, cards),
+                }, i({className: 'pa2 fas fa-times f4 f5-l'})),
+                div({className: 'pa3  flex flex-wrap'}, cards),
             ]),
             
         ]);
@@ -217,18 +224,20 @@ function whatsInside(dispatch, model){
 }
 
 function card(dispatch, box) {
-    return div({className: 'relative w-100 bg-white br4 pa3 flex justify-between items-center mv3'},[
+    return div({className: 'relative w-100 bg-white br4 pa3 flex flex-row-m flex-row-l flex-column justify-between items-center-ns mv3'},[
         a({
             href: `/home/${box.index}/remove`,
             className: 'link absolute right-0 top-0 pointer dim pa2 fas fa-times',
             onclick: (e) =>  { console.log(e.target);e.preventDefault(); addItem(dispatch, removeProductClickMsg, e.target.getAttribute('href'))},
         }),
-        div({className: ''}, boxImage('mw3', box.image, box.name)),
-        div({className: 'flex justify-between w-60 ph2'}, [
-            boxName(box.name),
-            boxPrice(box.price),
+        div({className:'flex w-100'},[
+            div({className: ''}, boxImage('mw3', box.image, box.name)),
+            div({className: 'w-100 flex flex-column flex-row-ns justify-center justify-between-ns items-center-ns ph2'}, [
+                boxName(box.name),
+                boxPrice(box.price),
+            ]),
         ]),
-        div({className: ''}, counter(box.id, box.quantity, dispatch)),
+        div({className: 'mt2 mt0-ns'}, counter(box.id, box.quantity, dispatch)),
     ]); 
 }
 
@@ -257,13 +266,17 @@ function cart(dispatch, model){
             return card(dispatch, element)
         });
         return div({
-            className: 'fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center z-999 bg-black-70'
+            className: 'fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center z-999 bg-black-70 pa2',
+            onclick: (e) => {if(e.target !== e.currentTarget) return; dispatch(closeCartClickMsg()) }
         }, [
-            div({className: 'relative w6 pa3 bg-light-gray z-max'},[
+            div({
+                className: 'overflow-y-auto relative w7 pa3 bg-light-gray z-max',
+                style:'max-height: 455px',
+            },[
                 div({
                     className: 'absolute right-0 top-0 pointer dim',
                     onclick: (e) =>{e.stopPropagation(); dispatch(closeCartClickMsg())},
-                }, i({className: 'pa2 fas fa-times'})),
+                }, i({className: 'pa2 fas fa-times f4 f5-l'})),
                 div({className: 'pa3 maxh5 overflow-y-auto'}, cards),
                 cartActions(model),
             ]),
@@ -281,11 +294,11 @@ function boxImage(className, path, alt){
 }
 
 function boxName(name){
-    return h3({className: 'mv1'}, name)
+    return h3({className: 'mv1 ph2 pr0-ns'}, name)
 }
 
 function boxPrice(price){
-    return p({className: 'red fw7 mv1'}, `${price} грн.`);
+    return p({className: 'red fw7 mv1 mh2'}, `${price} грн.`);
 }
 
 function boxButton(cart,id, dispatch){
@@ -329,7 +342,7 @@ function addedToCartBtn(dispatch, id){
 
 function counter(id, quantity, dispatch){
  
-    return div({className: 'flex justify-between bg-white mw4'},[
+    return div({className: 'flex justify-between-ns bg-white mw4'},[
         a({
             className: 'ph3 pv2 pointer link ba hover-white hover-bg-black b--black',
             href: `/home/${id}/delete`,
@@ -399,6 +412,7 @@ function view(dispatch, model) {
 }
 const node = document.querySelector('#app');
 const cartInHeader = document.querySelector("#cart");
+const spinner = document.querySelector(".spinner");
 
 function app(initModel, update, view, node) {
     let model = initModel;
